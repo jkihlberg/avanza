@@ -1,2 +1,1 @@
-# avanza
-avanza
+Small collection of python scripts that calculates the average intrest on your avanza deposits.
