@@ -36,6 +36,14 @@ def main(argv):
         idx = yahooIndex.YahooIndex(argv[3], earliestDate)
         interest = transactionCalculations.interestFromTransactions(transactions, int(argv[2]), idx)
         print "Yearly interest relative to " + argv[3] + ": " + str(interest) + "%"
+        print "\n\n"
+
+        print "List of transactions and yearly interest for each"
+        for transaction in transactions:
+            value = transactionCalculations.valueTransactionAndIntrest([transaction], date.today(), interest, idx)
+            yearsSinceTransaction = ((date.today() - transaction[0]).days)/365.0
+            yearlyInterest = pow((value / transaction[1]), (1 / yearsSinceTransaction))
+            print("%s: %.1f%%" % (str(transaction[0]), (((yearlyInterest) - 1)* 100.0)))
 
 if __name__ == "__main__":
     if len(sys.argv) != 4 and len(sys.argv) != 3:
