@@ -5,7 +5,6 @@ from datetime import date, timedelta
 
 class YahooIndex:
     def __init__(self,ticker, startDate):
-        # Transactions, on the format [[date, ammount], ... ]
         self.closingPrice = []
         self.earliestDate = date.today()
 

@@ -7,7 +7,6 @@ import generic
 
 class Index:
     def __init__(self):
-        # Transactions, on the format [[date, ammount], ... ]
         self.closingPrice = []
         self.earliestDate = date.today()
 
