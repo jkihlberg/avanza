@@ -7,6 +7,7 @@ import index
 import transactionCalculations
 import yahooStockIndex
 import multipleIndex
+import percentageIndex
 import argparse
 
 def main():
@@ -16,6 +17,7 @@ def main():
     parser.add_argument("value", type=int, help="value of account")
     parser.add_argument("-s", "--stock", type=str, action='append', help="stock ticker to be added from YahooFinance")
     parser.add_argument("-c", "--currency", type=str, action='append', help="currency ticker to be added from YahooFinance")
+    parser.add_argument("-p", "--percentage", type=float, action='append', help="percentage index")
     args = parser.parse_args()
 
     transactions = generic.getTransaction(args.file)
@@ -42,7 +44,7 @@ def main():
     interest = transactionCalculations.interestFromTransactions(transactions, args.value, index.Index())
     print "Yearly interest: " + str(interest) + "%"
 
-    if args.stock or args.currency:
+    if args.stock or args.currency or args.percentage:
         indexes = []
         indexesString = ""
 
@@ -56,6 +58,12 @@ def main():
             for stock in args.stock:
                 indexesString += stock + "+"
                 idx = yahooStockIndex.YahooStockIndex(stock, earliestDate)
+                indexes.append(idx)
+
+        if args.percentage:
+            for percentage in args.percentage:
+                indexesString += str(percentage) + "%+"
+                idx = percentageIndex.PercentageIndex(percentage)
                 indexes.append(idx)
 
         indexesString = indexesString[:-1]
