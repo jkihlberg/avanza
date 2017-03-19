@@ -3,7 +3,7 @@ from yahoo_finance import Share
 import generic
 from datetime import date, timedelta
 
-class YahooIndex:
+class YahooStockIndex:
     def __init__(self,ticker, startDate):
         self.closingPrice = []
         self.earliestDate = date.today()
